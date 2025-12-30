@@ -1,0 +1,5 @@
+{
+  "name": "CryptoPulse Dashboard",
+  "description": "A modern, real-time cryptocurrency monitoring dashboard that tracks live stats and historical price data for Bitcoin, Ethereum, and Solana using the CoinGecko API.",
+  "requestFramePermissions": []
+}
