@@ -12,9 +12,9 @@ on:
       - main
 
 env:
-  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GKE_CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  GCP_PROJECT_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+  GKE_CLUSTER_NAME: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  GKE_ZONE: ${{ secrets.AWS_REGION }}
   IMAGE_NAME: bitcoin-app
   IMAGE_TAG: ${{ github.sha }}
 
