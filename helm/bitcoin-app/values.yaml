@@ -3,7 +3,7 @@
 replicaCount: 3
 
 image:
-  repository: rukevweubio/my-ecommerceapp
+  repository: rukevweubio/mario-game-ubio
   pullPolicy: Always
   tag: "latest"
 
