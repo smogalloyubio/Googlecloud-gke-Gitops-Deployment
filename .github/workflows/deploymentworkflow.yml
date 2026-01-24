@@ -11,20 +11,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Required for SonarCloud
+          fetch-depth: 0 
 
     
      
 
       # 2. Build Docker Image
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }} ./bitcoinapp
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/react-app:lastest ./bitcoinapp
 
       # 3. Trivy Security Scan (Vulnerabilities)
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }}'
+          image-ref: '${{ secrets.DOCKER_USERNAME }}/react-app:latest'
           format: 'table'
           exit-code: '0' # Fails the build if "CRITICAL" issues are found
           ignore-unfixed: true
@@ -39,4 +39,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/react-app:latest 
