@@ -1,6 +1,5 @@
 # Default values for bitcoin-app Helm chart
-
-replicaCount: 3
+replicaCount: 1  # Reduced to 1 to ensure it fits on small GKE nodes initially
 
 image:
   repository: rukevweubio/mario-game-ubio
@@ -8,7 +7,6 @@ image:
   tag: "latest"
 
 imagePullSecrets: []
-
 nameOverride: ""
 fullnameOverride: ""
 
@@ -21,7 +19,7 @@ podAnnotations: {}
 
 podSecurityContext:
   runAsNonRoot: true
-  runAsUser: 1000
+  runAsUser: 101 # Nginx unprivileged user is often 101 or 1000
   fsGroup: 1000
 
 securityContext:
@@ -34,68 +32,51 @@ securityContext:
 service:
   type: LoadBalancer
   port: 80
-  targetPort: 3000
-  annotations: {}
-
-ingress:
-  enabled: false
-  className: "nginx"
-  annotations: {}
-  hosts:
-    - host: bitcoin-app.example.com
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
+  targetPort: 80 # Nginx standard is 80 (or 8080 for unprivileged images)
 
 resources:
+  # Removing hard limits helps if the GKE nodes are small
   limits:
-    cpu: 500m
     memory: 256Mi
   requests:
-    cpu: 250m
+    cpu: 100m
     memory: 128Mi
 
-autoscaling:
-  enabled: true
-  minReplicas: 2
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
-# Health checks
+# Health checks - Fixed to point to Port 80
 livenessProbe:
   httpGet:
     path: /
-    port: 3000
+    port: 80
   initialDelaySeconds: 30
   periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
 
 readinessProbe:
   httpGet:
     path: /
-    port: 3000
+    port: 80
   initialDelaySeconds: 10
   periodSeconds: 5
-  timeoutSeconds: 5
-  failureThreshold: 2
 
-# Environment variables
-env: []
-  # - name: LOG_LEVEL
-  #   value: "info"
+# --- ADDED FOR GKE READ-ONLY FIX ---
+# These emptyDirs allow Nginx to write its temporary files
+extraVolumes:
+  - name: nginx-cache
+    emptyDir: {}
+  - name: nginx-run
+    emptyDir: {}
+  - name: tmp
+    emptyDir: {}
 
-# Persistence
-persistence:
-  enabled: false
-  storageClass: "standard"
-  accessMode: ReadWriteOnce
-  size: 1Gi
+extraVolumeMounts:
+  - name: nginx-cache
+    mountPath: /var/cache/nginx
+  - name: nginx-run
+    mountPath: /var/run
+  - name: tmp
+    mountPath: /tmp]
+
+autoscaling:
+enabled: false
+minReplicas: 1
+maxReplicas: 5
+targetCPUUtilizationPercentage: 80
