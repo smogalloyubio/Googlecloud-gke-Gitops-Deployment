@@ -2,7 +2,7 @@
 replicaCount: 1  # Reduced to 1 to ensure it fits on small GKE nodes initially
 
 image:
-  repository: rukevweubio/mario-game-ubio
+  repository: rukevweubio/my-ecommerceapp
   pullPolicy: Always
   tag: "latest"
 
