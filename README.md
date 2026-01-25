@@ -220,6 +220,7 @@ jobs:
           push: true
           tags: <docker-username>/<image-name>:latest
 ```
+![Gitaction pipeline](https://github.com/smogalloyubio/04-Googlecloud-gke-Gitops-pipeline/blob/main/picture/Screenshot%202026-01-24%20at%2022.38.55.png)
 
 ### Continuous Delivery – GitOps with Argo CD
 
