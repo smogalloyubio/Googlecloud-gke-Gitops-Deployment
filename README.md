@@ -349,7 +349,7 @@ terraform init
 terraform plan
 terraform apply
 ```
-
+![terraform  provison](https://github.com/smogalloyubio/04-Googlecloud-gke-Gitops-pipeline/blob/main/picture/Screenshot%202026-01-24%20at%2019.41.43.png)
 Configure cluster access:
 
 ```bash
