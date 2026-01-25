@@ -61,7 +61,7 @@ GitHub Repository
            ▼
         GKE Cluster
 ```
-
+![diagram flow](https://github.com/smogalloyubio/04-Googlecloud-gke-Gitops-pipeline/blob/main/picture/Untitled-2025-12-26-1916.png)
 ---
 
 ## Technologies Used
