@@ -390,6 +390,7 @@ This approach simulates a **real disaster recovery or cluster migration scenario
 kubectl get all --all-namespaces
 velero restore get
 ```
+![velero restore on gke](https://github.com/smogalloyubio/04-Googlecloud-gke-Gitops-pipeline/blob/main/picture/Screenshot%202026-01-24%20at%2022.26.39.png)
 
 * Application workloads are successfully restored on GKE
 * Kubernetes resources match the original Minikube state
