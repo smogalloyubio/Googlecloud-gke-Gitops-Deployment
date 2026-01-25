@@ -327,7 +327,7 @@ velero install \
   --bucket <BUCKET_NAME> \
   --secret-file ./credentials-velero
 ```
-
+![install  velero](https://github.com/smogalloyubio/04-Googlecloud-gke-Gitops-pipeline/blob/main/picture/Screenshot%202026-01-24%20at%2020.47.54.png)
 ---
 
 ### 5. Backup the Minikube Cluster
